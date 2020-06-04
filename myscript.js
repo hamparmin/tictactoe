@@ -4,13 +4,14 @@ const gameBoard = (function(){
     const cells=new Array();
     const instructions=document.querySelector(".instruct");
     const board=document.querySelector(".board");
-    const side=document.querySelector("input");
     let red=false;
 
     //figure out which side
     const setUp = function(){
-        red=side.checked;
-        console.log(red);
+        //check side
+        red=document.querySelector("input").checked;
+
+        //reset board
         board.innerHTML="";
         for (let i=0;i<9;i++){
             cells[i]=document.createElement('div');
@@ -20,19 +21,27 @@ const gameBoard = (function(){
             cells[i].style.color="white";
             board.appendChild(cells[i]);
         }
+        //reset if changes sides
+        document.querySelector("input").addEventListener('click',function(){
+            setUp();
+        })
     };
-    const step= function(){
-        // instructions.textContent="It's your turn!";
-        cells.forEach(addEventListener('click',function(e){
-            if (red){
-                e.target.style.background="red";
-                e.target.style.color="red";
-            } else {
-                e.target.style.background="blue";
-                e.target.style.color="blue";
-            }
-        }))
-    };
+    const step = function(){
+        // set up helper function
+        const paint = function(color,event){
+            event.target.style.color=color;
+            event.target.style.background=color;
+        };
+        const color=red ? "red" : "blue";
+        // activate for one step
+        cells.forEach(cell =>{
+            cell.addEventListener('click',function(e){
+                paint(color,e);
+            }, {once : true});
+    });
+};
+
+
     return{
         setUp,
         step
@@ -52,5 +61,4 @@ side.addEventListener('click',function() {
 }
 );
 
-
-// gameBoard.step();
+ gameBoard.step();
