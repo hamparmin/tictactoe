@@ -5,6 +5,7 @@ const gameBoard = (function(){
     const instructions=document.querySelector(".instruct");
     const board=document.querySelector(".board");
     let red=false;
+    let gameArray=[];
 
     //figure out which side
     const setUp = function(){
@@ -27,18 +28,25 @@ const gameBoard = (function(){
         })
     };
     const step = function(){
-        // set up helper function
-        const paint = function(color,event){
-            event.target.style.color=color;
-            event.target.style.background=color;
-        };
-        const color=red ? "red" : "blue";
+        let playerColor=red ? "red" : "blue";
+        let enemyColor=red ? "blue" : "red";
+        document.documentElement.style.setProperty("--player-color",playerColor);
+        document.documentElement.style.setProperty("--enemy-color",enemyColor);
         // activate for one step
         cells.forEach(cell =>{
             cell.addEventListener('click',function(e){
-                paint(color,e);
-            }, {once : true});
+                e.target.style.background=playerColor;
+                e.target.style.color=playerColor;
+                console.log(e.target.value);
+            });
     });
+    const logic = function(){
+        setUp()
+        for (let i=0;i<4;i++){
+
+        };
+
+    };
 };
 
 

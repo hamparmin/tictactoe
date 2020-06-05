@@ -1,3 +1,7 @@
+:root{
+    --player-color:blue;
+    --enemy-color:red;
+}
 body{
     background: rgb(255,203,0);
     background: linear-gradient(90deg, rgba(255,203,0,0.7) 0%, rgba(243,252,7,0.7) 35%, rgba(0,212,255,0.6) 100%);
